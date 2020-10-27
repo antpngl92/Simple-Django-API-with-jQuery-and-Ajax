@@ -1,5 +1,5 @@
 # Simple-Django-API-with-jQuery-and-Ajax
-Many-to-many Django API with jQuery and Ajax
+Many-to-many Relationship Models developed using Django with a simple AP, jQuery and Ajax
 
 
 This project has been created under Conda virtual environment : https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
