@@ -1,0 +1,496 @@
+{% extends 'item/base.html' %}
+
+{% block content%}
+<!--========================== ORDERS LISTING =========================================-->
+<div class="container border bg-light mt-3">
+    <div class="h1 text-center mt-3 mb-5">
+       Orders:
+    </div>
+    <ul class="list-group list-group-flush mt-3 uListO">
+        {% for order in orders %}
+        <li class='list-group-item' > <strong id="__{{order.id}}">{{order.num}}</strong>
+            <div class='float-right'>
+                <button type='button' class='btn btn-info order-info' data-toggle="modal" data-target="#orderInfoModal" data-id="{{order.id}}" >Info</button>
+                <button type='button' class='btn btn-success order-update' data-toggle="modal" data-target="#orderFormModal" data-id="{{order.id}}">Update</button>
+                <button type='button' class='btn btn-danger order-delete' data-id="{{order.id}}">Delete</button>
+            </div>
+        </li>
+        {%endfor%}
+    </ul>
+    <div class="text-center mt-3">
+        <button class="btn btn-info mb-3 btn-create-order" data-toggle="modal" data-target="#orderFormModal">
+            Create Order
+        </button>
+    </div>
+</div>
+<!--========================== ORDERS LISTING  END ====================================-->
+<!-------------------------------------------------------------------------------->
+<!--=============== ORDERS MODAL INFO ===================-->
+<div class="modal fade" id="orderInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderTitleInfo"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body-order-info title m-3">
+        </div>
+        <div class="modal-footer fiii">
+        </div>
+      </div>
+    </div>
+  </div>
+<!--=============== ORDERS MODAL INFO END =============-->
+<!-------------------------------------------------------------------------------->
+<!--=============== ORDERS MODAL FORM =================-->
+<div class="modal fade" id="orderFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditLabelOrder"></h5>
+          <h6 class="hiddenIdOrder" style="display: none;"></h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="InputNumber">Order Number:</label>
+                  <input type="text" class="form-control" id="InputNumber" aria-describedby="numberHelp" placeholder="Enter order number">
+                  <small id="emailHelp" class="form-text text-muted">Please enter the order number.</small>
+                </div>
+                <div class="form-group">
+                  <label for="InputDate">Order date</label>
+                  <input type="date" class="form-control" id="InputDate" placeholder="Password">
+                </div>
+                <div class="form-select">
+                    <label for="multyItemSelect">Select the Items you want to add to the order</label>
+                    <select data="items" id="multyItemSelect" multiple>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer 2"> 
+        </div>
+      </div>
+    </div>
+  </div>
+<!--=============== ORDERS MODAL FORM END =============-->
+<!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+<!--========================== ITEMS LISTING =========================================-->
+    <div class="container border bg-light mt-3">
+        <div class="h1 text-center mt-3 mb-5">
+           Items in stock:
+        </div>
+        <ul class="list-group list-group-flush mt-3 uListI">
+            {% for item in items %}
+            <li class='list-group-item' > <strong id="__{{item.id}}">{{item.name}}</strong>
+                <div class='float-right'>
+                    <button type='button' class='btn btn-info item-info' data-toggle="modal" data-target="#itemInfoModal" data-id="{{item.id}}" >Info</button>
+                    <button type='button' class='btn btn-success item-form-update' data-toggle="modal" data-target="#itemFormModal" data-id="{{item.id}}">Update</button>
+                    <button type='button' class='btn btn-danger item-delete' data-id="{{item.id}}">Delete</button>
+                </div>
+            </li>
+            {%endfor%}
+        </ul>
+        <div class="text-center mt-3">
+            <button class="btn btn-info mb-3 btn-create-item" data-toggle="modal" data-target="#itemFormModal">
+                Create Item
+            </button>
+        </div>
+    </div>
+<!--========================== ITEMS LISTING END =====================================-->
+<!-------------------------------------------------------------------------------->
+<!--=============== ITEMS MODAL INFO ===================-->
+<div class="modal fade" id="itemInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditLabelItem"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body-item-info title m-3">
+        </div>
+        <div class="modal-footer ftii">
+        </div>
+      </div>
+    </div>
+  </div>
+<!--=============== ITEMS MODAL INFO END =============-->
+<!-------------------------------------------------------------------------------->
+<!--=============== ITEMS MODAL FORM =================-->
+  <div class="modal fade" id="itemFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditLabelItem2"></h5>
+          <h6 class="hiddenId" style="display: none;"></h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form class="form-edit-item">
+                <div class="form-group">
+                  <label for="itemNameInput">Name: </label>
+                  <input type="text" class="form-control" id="itemNameInput" aria-describedby="itemNameHelp" placeholder="Item name">
+                  <small id="itemNameHelp" class="form-text text-muted">Enter the name of the Item that you want to create.</small>
+                </div>
+                <div class="form-group">
+                  <label for="itemPriceInput">Price:</label>
+                  <input type="number" step="0.01" min="0" class="form-control" id="itemPriceInput" placeholder="Item Price">
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="itemShelfLifeCheckbox"/>
+                  <label class="form-check-label" for="itemShelfLifeCheckbox">Does the item have a shelf life?</label>
+                  <small id="itemNameHelp" class="form-text text-muted">Check for "yes" and leave blank for "no"</small>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+<!--=============== ITEMS MODAL FORM END =============-->
+<!-------------------------------------------------------------------------------->
+ {% endblock %}
+
+{% block scripts %}
+<script>
+    $(function () {
+        // ============================ ITEM ==========================//
+        // GET Item
+        $(document).on('click','.item-info',function(){ // Info button for Items
+            var item_id = $(this).attr('data-id') // Item ID
+            $('#itemInfoModal').modal('show') // Open modal for dynamically added items 
+            $('.ftii').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>') // add close button at bottom
+            $("#modalEditLabelItem").html("Item ID #" + item_id) // Edit modal heading 
+
+            // Get item most updated info and add the item to the moda 
+            $.ajax({
+                method: "GET",
+                contentType: "application/json",
+                url: "{% url 'item api' 0 %}".replace("0", item_id), 
+                success: function(data){
+                    // Get the data passed from the view.py
+                    var hasShelfLife = data[0]['fields'].shelfLife
+                    var slToText = "Doesn't have shelf life";
+                    if(hasShelfLife)
+                            slToText = "Has shelf life";
+                    // Add data to the Modal
+                    $(".modal-body-item-info").html("" +
+                        "Item Name: <b>" + data[0]['fields'].name +"</b><br>" + 
+                        "Item Price: <b>£" + (data[0]['fields'].price).toFixed(2)  + "</b><br>" +
+                        "Shelf Life: <b>" + slToText + "</b>" )
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert("Failed " + textStatus + " " + errorThrown)
+                }
+            })
+        })
+        // DELETE item
+        $(document).on('click','.item-delete',function(){
+            var table_row = $(this).parent().parent();
+            var item_id = $(this).attr('data-id');
+            $.ajax({
+                method: "DELETE",
+                url: "{% url 'item api' 0 %}".replace("0", item_id),
+                success: function(data, textStatus, jqXHR){
+                    table_row.remove();
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert("Failed " + textStatus + " " + errorThrown)
+                }
+            })
+        })
+        // EDIT item
+        $(document).on('click','.item-form-update',function(){
+            var item_id = $(this).attr('data-id') // Get id of item 
+            $("#modalEditLabelItem2").html("Item ID #" + item_id) // Add item it to modal  heading 
+                
+            // Add buttons specific to edit in the footer
+            $('.modal-footer').html(""+ 
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>" +
+            "<button type='button' class='btn btn-primary save-edit-item' >Save changes</button>")
+            // Get most recent data ot item and fill the EDIT form with it 
+            $.ajax({
+                method: "GET",
+                contentType: "application/json",
+                url: "{% url 'item api' 0 %}".replace("0", item_id), 
+                success: function(data){
+                    // Get the data passed from the view.py
+                    var item_name = data[0]['fields'].name
+                    var item_price = data[0]['fields'].price
+                    var hasShelfLife = data[0]['fields'].shelfLife
+                    // Put the data into the form
+                    // $("#modalEditLabel").html("Item ID: " + item_id)
+                    $('#itemNameInput').val(item_name)
+                    $('#itemPriceInput').val(item_price)
+                    $('#itemShelfLifeCheckbox').prop('checked', false);
+                    if(hasShelfLife == true){
+                        $('#itemShelfLifeCheckbox').prop('checked', true);
+                    }
+                    $('.hiddenId').html(item_id)
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert("Error: " + textStatus + " " + errorThrown)
+                }
+            })
+            $('.save-edit-item').click(function(){ // button for saving the item 
+            // get the values from the input fields 
+            var item_name = $('#itemNameInput').val()
+            var item_price = $('#itemPriceInput').val()
+            var item_sl = "off"
+            var item_id = $('.hiddenId').text()
+            if($('#itemShelfLifeCheckbox').prop('checked')){
+                item_sl = "on"
+            }
+            $.ajax({ //  Ajax call with the values 
+                method: "PUT",
+                data:{
+                    'n' : item_name,
+                    'p' : item_price,
+                    'sl': item_sl
+                },
+                contentType: "application/json",
+                url: "{% url 'item api' 0 %}".replace("0", item_id), 
+                success: function(data){
+                    $('#itemFormModal').modal('toggle');
+                    $('#__'+item_id).html(item_name)
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert("Error: " + textStatus + " " + errorThrown)
+                }
+            })
+        })
+        })           
+        // CREATE item
+        $(document).on('click','.btn-create-item',function(){
+            $("#modalEditLabelItem2").html("Enter Item Details") // change modal heading text
+            $('.modal-footer').html(""+  // Add buttons in the modal footer specific to creating new item 
+                "<button type='button' class='btn btn-secondsary' data-dismiss='modal'>Close</button>" +
+                "<button type='button' class='btn btn-primary save-new-item' >Create Item</button>")
+            $('#itemNameInput').val('') // reset the input fields from previous creating/editing 
+            $('#itemPriceInput').val('') // ^
+            $('#itemShelfLifeCheckbox').prop('checked', false);
+            $('.save-new-item').click(function(){ // buton for saving 
+                var item_name = $('#itemNameInput').val()
+                var item_price = $('#itemPriceInput').val()
+                var item_sl = "off"
+                var item_id = $('.hiddenId').text()
+                if($('#itemShelfLifeCheckbox').prop('checked')){
+                    item_sl = "on"
+                }
+                $.ajax({
+                    method: "POST",
+                    data:{
+                        'n' : item_name,
+                        'p' : item_price,
+                        'sl': item_sl
+
+                    },
+                    contentType: "application/json",
+                    url: "{% url 'item create api' %}",
+                    success: function(data){ // on success update the list with the created item 
+                        $('#itemFormModal').modal('toggle');
+                        var item_id = data['id']
+                        $('.uListI').append("" + 
+                        "<li class='list-group-item' > <strong id='__" + item_id + "'>"+item_name+"</strong>"+
+                            "<div class='float-right'> " +
+                                "<button type='button' class='btn btn-info item-info' data-toggle=''modal' data-target='#itemInfoModal' data-id='" +item_id +"' >Info</button> " +
+                                "<button type='button' class='btn btn-success item-form-update' data-toggle='modal' data-target='#itemFormModal' data-id='"+ item_id +"'>Update</button> " +
+                                "<button type='button' class='btn btn-danger item-delete' data-id='"+item_id+"'>Delete</button> "+
+                            "</div>"+
+                        "</li>")   
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("Error: " + textStatus + " " + errorThrown)
+                    }
+                })
+            })
+        })
+        // ============================ ITEM  END=======================//
+
+        // ============================ ORDER ==========================//
+        // CREATE Order:
+        $(document).on('click','.btn-create-order',function(){     
+            $('#InputNumber').val("") // reset the input fields 
+            $('#InputDate').val("")
+            $('#multyItemSelect').val("") 
+            $('#modalEditLabelOrder').html("Enter Order Details")   // add modal heading 
+            $('.2').html(  // add buttons specific for creating orders 
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button> " +
+            "<button type='button' class='btn btn-primary save-new-order' >Create Order</button>")       
+            $.ajax({
+                method: "GET",
+                contentType: "application/json",
+                url: "{% url 'order-items api'  %}", 
+                success: function(data){
+                    $('#multyItemSelect').html("")
+                    var index = 1;
+                     data.forEach(element => {
+                        $('#multyItemSelect').append("<option value='" + index + "' id='" +index+ "'>"+ element['fields'].name+"</option>")
+                        index++;
+                    });
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert("Failed " + textStatus + " " + errorThrown)
+                }
+            })        
+        })
+        $(document).on('click','.save-new-order',function(){  
+            var order_num = $('#InputNumber').val() // get input 
+            var order_date = $('#InputDate').val() // ^
+            var item_selected = $('#multyItemSelect').val() 
+            var arr = [] // arr for the item names 
+             // for each selected item add their names in the arr variable 
+            var index = 0;
+            item_selected.forEach(e => {
+                arr[index] = $('#' + e).html()
+                index++
+            });
+            $.ajax({
+                 method: "POST",
+                url: "{% url 'order-items api'  %}",
+                data: {'arr[]': arr,
+                        'o_n' : order_num,
+                        'o_d' : order_date},
+                success: function(data){
+                    // append create item to the item list     
+                    $('#orderFormModal').modal('toggle')
+                    var id = data['id'];
+                    $('.uListO').append( 
+                        "<li class='list-group-item'><strong id='__"+ id +"'>"+ order_num+"</strong>" +
+                        "<div class='float-right'>"+
+                            "<button type='button' class='btn btn-info order-info' data-toggle='modal' data-target='#orderInfoModal' data-id='"+id+"' >Info</button> "+
+                            "<button type='button' class='btn btn-success order-update' data-toggle='modal' data-target='#orderFormModal' data-id='"+id+"'>Update</button> "+
+                            "<button type='button' class='btn btn-danger order-delete' data-id='"+id+"'>Delete</button>"+
+                        "</div>"+
+                    "</li>");
+                    $('orderFormModal').modal('toggle')
+                        
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert("Failed " + textStatus + " " + errorThrown)
+                }
+            })
+        })
+        // GET Order 
+        $(document).on('click', '.order-info', function(){
+            $('.modal-body-order-info').html("") // clear the modal from previous data
+            $('.fiii').html("<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button> " ) // attach the close button to the footer 
+            var order_id = $(this).attr('data-id')
+            $('#orderTitleInfo').html("Order ID: #" + order_id) // add modal header 
+            $.ajax({
+                method: "GET",
+                url: "{% url 'order-item api' 0 %}".replace("0", order_id),
+                success: function(data){
+                    var order_number = data[0]['fields'].num
+                    var order_date = data[0]['fields'].date
+                     $('.modal-body-order-info').html(""+
+                      "Order Number: <b>" + order_number +"</b><br>" + 
+                      "Order Date: <b>" + order_date  + "</b><br> " + 
+                      "Items: </br>")
+                    data[0]['fields']['items'].forEach(el => {
+                        var name = $('#__'+el).html()
+                        $('.modal-body-order-info').append("<b>" +name + "</b> </br>  ")
+                    });
+                }
+            })
+        })
+        // DELETE Order
+        $(document).on('click', '.order-delete', function(){
+            var order_id = $(this).attr('data-id');
+            var order_row = $(this).parent().parent();
+            $.ajax({
+                method: "DELETE",
+                url: "{% url 'order-item api' 0%}".replace(0, order_id),
+                success: function(){
+                    order_row.remove();
+                },
+                error: function(){
+                    alert("Failed " + textStatus + " " + errorThrown)
+                }
+            })
+        })
+        // EDIT Order
+        $(document).on('click', '.order-update', function(){
+            $('#InputNumber').val("") // reset input fields from previous data
+            $('#InputDate').val("")
+            $('#multyItemSelect').val("")
+            var order_id = $(this).attr('data-id')
+            $('.hiddenIdOrder').html(order_id)
+            $('#modalEditLabelOrder').html('Order ID #' + order_id) // set modal header
+            $('.2').html(  // atach buttons for editing in the footer
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button> " +
+            "<button type='button' class='btn btn-primary save-edit-order'>Save changes</button>")
+            $.ajax({ // get the order details and add them to the form fields 
+                method: "GET",
+                url: "{% url 'order-items api' %}",
+                success: function(data){
+                    var index = 1;
+                    $('#multyItemSelect').html("")
+                    data.forEach(element => {
+                        $('#multyItemSelect').append("<option value='" + index + "' id='" +index+ "'>"+ element['fields'].name+"</option>")
+                        index++;
+                    });
+                    $.ajax({
+                        method: "GET",
+                        url: "{% url 'order-item api' 0%}".replace(0, order_id),
+                        success: function(data){
+                            $('#InputNumber').val(data[0]['fields'].num)
+                            $('#InputDate').val(data[0]['fields'].date)
+                        },
+                        error: function(){
+                            alert("Failed " + textStatus + " " + errorThrown)
+                        }
+                    })
+                }
+            })
+            
+        })
+        $(document).on('click','.save-edit-order', function(){
+                var order_id = $('.hiddenIdOrder').html()
+                var order_num = $('#InputNumber').val()
+                var order_date = $('#InputDate').val()
+                var item_selected = $('#multyItemSelect').val() 
+                var arr = [] // arr for the item names 
+                // for each selected item add their names in the arr variable 
+                var index = 0;
+                item_selected.forEach(e => {
+                    arr[index] = $('#' + e).html()
+                    index++
+                });
+                $.ajax({
+                    method: "PUT",
+                    url: "{% url 'order-item api'  0%}".replace('0', order_id),
+                    data: {'arr[]': arr,
+                            'o_n' : order_num,
+                            'o_d' : order_date},
+                    content_type:'application/json',
+                    success: function(data){
+                        $('#orderFormModal').modal('toggle')
+                        $('#__' + order_id).html(order_num)
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("Failed " + textStatus + " " + errorThrown)
+                    }
+                })
+        })             
+    })        
+</script>
+{% endblock %}
